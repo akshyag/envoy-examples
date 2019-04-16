@@ -1,6 +1,6 @@
-##How To Run The Example
+## How To Run The Example
 
-#In this example we run a tcp front proxy that load-balances between 2 endpoints
+In this example we run a tcp front proxy that load-balances between 2 endpoints
 
 1. Build the containers and start the services and front-proxy
 
