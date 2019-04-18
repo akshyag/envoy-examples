@@ -1,0 +1,6 @@
+FROM envoyproxy/envoy-alpine-dev:latest
+
+RUN mkdir -p /etc/envoy
+ADD ./eds.conf /etc/envoy/eds.conf
+RUN apk update && apk add python bash curl vim
+CMD /usr/local/bin/envoy -c /etc/front-envoy.yaml --service-cluster front-proxy

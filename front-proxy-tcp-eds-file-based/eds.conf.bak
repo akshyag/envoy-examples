@@ -1,0 +1,36 @@
+{
+  "version_info": "0",
+  "resources": [{
+    "@type": "type.googleapis.com/envoy.api.v2.ClusterLoadAssignment",
+    "cluster_name": "serviceendpoints",
+    "endpoints": [{
+      "locality": {
+          "region": "usa",
+          "zone": "ca",
+          "sub_zone": "local"
+      },
+      "lb_endpoints": [
+          {
+            "endpoint": {
+              "address": {
+                "socket_address": {
+                  "address": "172.20.0.2",
+                  "port_value": 8200
+                }
+              }
+            }
+          },
+          {
+            "endpoint": {
+              "address": {
+                "socket_address": {
+                  "address": "172.20.0.4",
+                  "port_value": 8200
+                }
+              }
+            }
+          }
+      ]
+    }]
+  }]
+}
