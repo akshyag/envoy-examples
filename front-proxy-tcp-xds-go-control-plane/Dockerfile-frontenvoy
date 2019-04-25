@@ -1,0 +1,7 @@
+FROM envoyproxy/envoy-alpine-dev:latest
+
+RUN apk update && apk add python bash curl vim
+ADD ./go-control-plane /usr/local/bin/go-control-plane
+ADD ./start_front_proxy.sh /usr/local/bin/start_front_proxy.sh
+RUN chmod u+x /usr/local/bin/start_front_proxy.sh
+ENTRYPOINT /usr/local/bin/start_front_proxy.sh

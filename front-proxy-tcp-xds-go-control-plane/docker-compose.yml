@@ -1,0 +1,60 @@
+version: '2'
+services:
+
+  front-envoy:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontenvoy
+    volumes:
+      - ./front-envoy.yaml:/etc/front-envoy.yaml
+    networks:
+      testing_net:
+        ipv4_address: 172.20.0.2
+    expose:
+      - "8200"
+      - "8001"
+    ports:
+      - "8000:8200"
+      - "8001:8001"
+      - "5678:5678"
+
+  service1:
+    build:
+      context: .
+      dockerfile: Dockerfile-service
+    volumes:
+      - ./service-envoy.yaml:/etc/service-envoy.yaml
+    networks:
+      testing_net:
+        ipv4_address: 172.20.0.3
+    environment:
+      - SERVICE_NAME=1
+    expose:
+      - "8200"
+      - "8201"
+    ports:
+      - "8101:8200"
+
+  service2:
+    build:
+      context: .
+      dockerfile: Dockerfile-service
+    volumes:
+      - ./service-envoy.yaml:/etc/service-envoy.yaml
+    networks:
+      testing_net:
+        ipv4_address: 172.20.0.4
+    environment:
+      - SERVICE_NAME=2
+    expose:
+      - "8200"
+      - "8202"
+    ports:
+      - "8102:8200"
+
+networks:
+  testing_net: 
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
